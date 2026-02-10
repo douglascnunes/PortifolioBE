@@ -1,0 +1,26 @@
+.main {
+  flex: 1;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  height: 100vh;
+}
+
+
+.main>* {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+
+@media (max-width: 768px) {
+  .main {
+    padding: 1rem;
+  }
+
+  .main>* {
+    max-width: 100%;
+  }
+}

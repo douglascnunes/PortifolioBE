@@ -1,0 +1,55 @@
+.admSection {
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  gap: 2rem;
+  margin: 3rem 0;
+  padding: 2rem;
+}
+
+.admSection > div:not(:last-child) {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.admSection div label {
+  font-size: 1rem;
+  font-weight: 600;
+  color: #dddddd;
+}
+
+
+.recTitle {
+  grid-row: 1/2;
+}
+
+.recAuthor {
+  grid-row: 2/3;
+}
+
+.recText {
+  grid-row: 1/3;
+}
+
+.recText textarea {
+  height: 100%;
+  resize: none;
+}
+
+.buttonGroup {
+  grid-column: -2 / -1;
+  grid-row: 3 / 4;
+  display: flex;
+  flex-direction: row;
+  gap: 1rem;
+}
+
+.buttonGroup button {
+  width: 100%;
+}
+
+.recList {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}

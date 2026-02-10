@@ -1,0 +1,59 @@
+.container {
+  display: grid;
+  grid-template-columns: 1fr 3fr;
+  grid-template-rows: 1fr 1fr 1fr;
+  height: 12rem;
+  gap: 2rem;
+}
+
+.container>div {
+  padding: 0.5rem;
+  border: 0.1rem solid #dddddd;
+}
+
+.container h3 {
+  font-size: 1rem;
+  color: #dddddd;
+}
+
+.container>img {
+  grid-column: 1/2;
+  grid-row: 1/3;
+  width: 100%;
+}
+
+.graduation {
+  display: flex;
+  flex-direction: row;
+  gap: 0.5rem;
+}
+
+.graduation>img {
+  width: 3rem;
+  height: 3rem;
+}
+
+
+.recommendations {
+  grid-column: 1/2;
+  grid-row: 3/4;
+  display: flex;
+  flex-direction: row;
+  gap: 0.5rem;
+}
+
+.recommendations>svg {
+  width: 1.5rem;
+  fill: #dddddd;
+}
+
+.recommendations>span {
+  font-size: 1rem;
+  color: #dddddd;
+}
+
+.recommendations>p {
+  font-size: 2rem;
+  font-weight: 800;
+  color: #dddddd;
+}

@@ -1,0 +1,60 @@
+.button,
+.button:active {
+  display: flex;
+  background: none;
+  align-items: center;
+}
+
+.button:hover {
+  background-color: #222222;
+}
+
+.button svg {
+  fill: #dddddd;
+}
+
+.high {
+  justify-content: center;
+  font-size: 1rem;
+  font-weight: 700;
+  color: #dddddd;
+  width: 15rem;
+  height: 3rem;
+  border: 0.1rem solid #dddddd;
+}
+
+.high svg {
+  width: 1.5rem;
+  margin-right: 0.5rem;
+}
+
+.vlist {
+  font-size: 1rem;
+  border: none;
+  color: #dddddd;
+  width: 100%;
+  padding: 1rem;
+}
+
+.vlist svg {
+  width: 1.5rem;
+  margin-right: 0.5rem;
+}
+
+.icon {
+  border: none;
+  width: 1.5rem;
+  height: 1.5rem;
+}
+
+.icon:hover {
+  background-color: transparent;
+}
+
+.icon svg {
+  fill: #bbbbbb;
+}
+
+.icon svg:hover {
+  fill: #ffffff;
+}

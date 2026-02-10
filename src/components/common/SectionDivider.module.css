@@ -1,0 +1,22 @@
+.sectionDivider {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+
+  width: 100%;
+  padding: 5rem 0;
+}
+
+.line {
+  flex: 1;
+  height: 1px;
+  background-color: #444;
+}
+
+.text {
+  white-space: nowrap;
+  font-size: 0.9rem;
+  letter-spacing: 0.15em;
+  color: #777;
+  text-transform: uppercase;
+}
