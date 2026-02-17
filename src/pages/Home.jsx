@@ -3,12 +3,11 @@ import styles from './Home.module.css';
 import Button from '../components/common/Button';
 import SectionDivider from '../components/common/SectionDivider';
 import Resume from '../components/home/Resume';
+import { url } from '../util/api';
 
 
 function HomePage() {
   
-
-
   return (
     <>
       <section className={`${styles.container} ${styles.hero}`}>
@@ -20,7 +19,7 @@ function HomePage() {
           Desenvolvedor Full Stack, formado em TI, com experiência em estágio e atuação atual como Auxiliar de TI no desenvolvimento de um ERP web.
         </p>
         <div className={styles.buttons}>
-          <Button type="high">
+          <Button type="high" href={`${url}curriculum/active`} target="_blank" rel="noopener noreferrer">
             Veja mais sobre mim
           </Button>
           <Button type="high">
