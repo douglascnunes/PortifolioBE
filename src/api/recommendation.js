@@ -2,7 +2,7 @@ import { url } from '../util/api.js';
 import { getAuthToken } from '../util/auth.js';
 
 
-export async function getRecommendation({ signal }) {
+export async function getRecommendations({ signal }) {
 
   const response = await fetch(`${url}recommendations`, {
     signal,
@@ -10,7 +10,7 @@ export async function getRecommendation({ signal }) {
   });
 
   if (!response.ok) {
-    throw new Error("Failed to fetch recommendation data");
+    throw new Error("Failed to fetch recommendations data");
   }
 
   return await response.json();

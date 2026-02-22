@@ -10,10 +10,26 @@ export async function getCurriculums({ signal }) {
   });
 
   if (!response.ok) {
-    throw new Error("Failed to fetch recommendation data");
+    throw new Error("Failed to fetch curriculum data");
   }
 
   return await response.json();
+};
+
+
+
+export async function getActiveCurriculum() {
+
+  const response = await fetch(`${url}curriculum/active`);
+
+  if (!response.ok) {
+    if (response.status === 404) {
+      throw new Error("Não foi encontrado um currículo ativo");
+    }
+    throw new Error("Failed to fetch active curriculum data");
+  }
+
+  return response;
 };
 
 

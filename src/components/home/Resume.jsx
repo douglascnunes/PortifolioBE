@@ -1,17 +1,16 @@
 import { useQuery } from '@tanstack/react-query';
 import { getGeneral } from '../../api/general';
 
-
 import styles from './Resume.module.css';
 
 
 function Resume() {
+
   const { data, isLoading } = useQuery({
     queryKey: ['general', 'recommendations'],
     queryFn: ({ signal }) => getGeneral({ signal }),
   });
 
-  console.log(data?.resume?.recommendations);
 
   if (isLoading) {
     return <div>Loading...</div>;

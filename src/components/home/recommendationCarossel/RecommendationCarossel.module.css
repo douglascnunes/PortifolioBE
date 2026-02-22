@@ -1,0 +1,52 @@
+.container {
+  position: relative;
+  background-color: red;
+}
+
+.carosselHidden {
+  overflow: hidden;
+  width: 100%;
+}
+
+.cardsContainer {
+  display: flex;
+  height: 20rem;
+  gap: 1rem;
+  transition: transform 0.4s ease;
+}
+
+.cardsContainer div {
+  max-width: calc((100% - 2rem) / 3);
+  flex-shrink: 0;
+}
+
+.arrowButton {
+  position: absolute;
+  top: calc(50% - 2.25rem);
+  z-index: 999;
+  background-color: transparent;
+  border: none;
+}
+
+.arrowButton:first-child {
+  left: -2.8rem;
+}
+
+.arrowButton:last-child {
+  right: -2.8rem;
+}
+
+.arrowButton svg {
+  fill: #bbbbbb;
+  height: 4.5em;
+  width: 4.5rem;
+}
+
+.arrowButton:hover svg {
+  fill: #ffffff;
+}
+
+
+.arrowButton:disabled svg {
+  fill: #444444;
+}

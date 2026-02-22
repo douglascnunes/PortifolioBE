@@ -60,3 +60,9 @@
 .socialMidia span {
   color: #dddddd;
 }
+
+.recommendations {
+  display: flex;
+  flex-direction: row;
+  gap: 1rem;
+}
