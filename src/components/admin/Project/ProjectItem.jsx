@@ -1,11 +1,11 @@
 import { useMutation } from '@tanstack/react-query';
 import Button from '../common/Button';
 import styles from './RecommendationItem.module.css';
-import { deleteRecommendation } from '../../api/recommendation.js';
-import { queryClient } from '../../api/queryClient.js';
+import { deleteRecommendation } from '../../api/recommendation';
+import { queryClient } from '../../api/queryClient';
 
 
-export default function RecommendationItem({ data, onEdit }) {
+export default function ProjectItem({ data, onEdit }) {
   const { mutate } = useMutation({
     mutationFn: deleteRecommendation,
     onSuccess: () => {

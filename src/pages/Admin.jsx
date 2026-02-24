@@ -6,6 +6,7 @@ import { useState } from 'react';
 
 import Recommendation from '../components/admin/Recommendation.jsx';
 import Curriculum from '../components/admin/Curriculum.jsx';
+import Project from '../components/admin/Project/Project.jsx';
 
 
 export default function AdminPage() {
@@ -43,7 +44,7 @@ export default function AdminPage() {
       title = 'Usuários';
       break;
     case 'projects':
-      content = <h2>Projetos</h2>;
+      content = <Project />;
       title = 'Projetos';
       break;
     case 'blog':
@@ -128,7 +129,7 @@ export default function AdminPage() {
         <div className={styles.viewHeader}>
           <h1>{title}</h1>
         </div>
-          <hr />
+        <hr />
         <span className={styles.line} />
         {content}
       </section>

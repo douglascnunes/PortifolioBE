@@ -4,7 +4,9 @@ import { getRecommendations } from "../../../api/recommendation";
 
 
 import styles from './RecommendationCarossel.module.css';
-import { useState } from "react";
+import { useMemo, useState } from "react";
+import { shuffle } from "../../../util/array";
+
 
 
 export default function RecommendationCarossel() {
@@ -15,6 +17,11 @@ export default function RecommendationCarossel() {
     queryKey: ['recommendations'],
     queryFn: ({ signal }) => getRecommendations({ signal }),
   });
+
+  const shuffledRecommendations = useMemo(() => {
+    if (!data?.recommendations) return [];
+    return shuffle(data.recommendations);
+  }, [data]);
 
 
   return (
@@ -31,14 +38,14 @@ export default function RecommendationCarossel() {
       <div className={styles.carosselHidden}>
         <div className={styles.cardsContainer}
           style={{
-            transform: `translateX(calc(-${index} * ((100% -2rem) / 3 +1rem)))`,
+            transform: `translateX(calc(-${index} * ((100% - 2rem) / 3 + 1rem)))`,
           }}
         >
           {isLoading ? (
             <p>Carregando recomendações...</p>
           ) : (
             data?.recommendations?.length > 0 ? (
-              data?.recommendations?.map((rec) => (
+              shuffledRecommendations.map((rec) => (
                 <RecommendationCard key={rec.id} data={rec} />
               ))
             ) : (

@@ -96,8 +96,14 @@ function HomePage() {
 
       <section className={`${styles.container} ${styles.recommendations}`}>
         <RecommendationCarossel />
-      </section>  
-      
+      </section>
+
+      <SectionDivider>Meus Projetos</SectionDivider>
+
+      <section>
+        
+      </section>
+
     </>
   )
 };
