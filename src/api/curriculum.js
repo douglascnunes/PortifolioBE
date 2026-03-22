@@ -58,8 +58,6 @@ export async function activeCurriculum({ signal, curriculumID }) {
 export async function createCurriculum({ signal, curriculum }) {
   const token = getAuthToken();
 
-  console.log('Creating curriculum with data:', curriculum);
-
   const response = await fetch(`${url}curriculum`, {
     signal,
     method: 'POST',

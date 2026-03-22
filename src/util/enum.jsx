@@ -12,3 +12,9 @@ export const PROJECT_STATE = {
     label: "Online",
   }
 };
+
+
+export const TAG_TYPE = [
+  "TECH",
+  "SKILL",
+];

@@ -4,9 +4,10 @@ import styles from './Admin.module.css';
 import { useState } from 'react';
 
 
-import Recommendation from '../components/admin/Recommendation.jsx';
-import Curriculum from '../components/admin/Curriculum.jsx';
-import Project from '../components/admin/Project/Project.jsx';
+import Recommendation from '../components/admin/recommendation/Recommendation.jsx';
+import Curriculum from '../components/admin/curriculum/Curriculum.jsx';
+import Project from '../components/admin/project/Project.jsx';
+import Ability from '../components/admin/skill/Skill.jsx';
 
 
 export default function AdminPage() {
@@ -36,7 +37,7 @@ export default function AdminPage() {
       title = 'Tecnologias';
       break;
     case 'abilities':
-      content = <h2>Habilidades</h2>;
+      content = <Ability />;
       title = 'Habilidades';
       break;
     case 'users':

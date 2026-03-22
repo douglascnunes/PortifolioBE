@@ -1,9 +1,9 @@
-import Button from '../common/Button.jsx';
+import Button from '../../common/Button.jsx';
 import styles from './Recommendation.module.css';
-import SectionDivider from '../common/SectionDivider.jsx';
+import SectionDivider from '../../common/SectionDivider.jsx';
 import { useMutation, useQuery } from '@tanstack/react-query';
-import { createRecommendation, getRecommendations, updateRecommendation } from '../../api/recommendation.js';
-import { queryClient } from '../../api/queryClient.js';
+import { createRecommendation, getRecommendations, updateRecommendation } from '../../../api/recommendation.js';
+import { queryClient } from '../../../api/queryClient.js';
 import { useState } from 'react';
 
 

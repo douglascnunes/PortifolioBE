@@ -1,8 +1,8 @@
 import { useMutation } from '@tanstack/react-query';
-import Button from '../common/Button';
+import Button from '../../common/Button.jsx';
 import styles from './RecommendationItem.module.css';
-import { deleteRecommendation } from '../../api/recommendation.js';
-import { queryClient } from '../../api/queryClient.js';
+import { deleteRecommendation } from '../../../api/recommendation.js';
+import { queryClient } from '../../../api/queryClient.js';
 
 
 export default function RecommendationItem({ data, onEdit }) {

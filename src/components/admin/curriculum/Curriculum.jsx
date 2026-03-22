@@ -1,13 +1,13 @@
-import Button from '../common/Button.jsx';
+import Button from '../../common/Button.jsx';
 import styles from './Curriculum.module.css';
-import SectionDivider from '../common/SectionDivider.jsx';
+import SectionDivider from '../../common/SectionDivider.jsx';
 import { useMutation, useQuery } from '@tanstack/react-query';
-import { queryClient } from '../../api/queryClient.js';
+import { queryClient } from '../../../api/queryClient.js';
 import { useState } from 'react';
 
 
 import CurriculumItem from './CurriculumItem.jsx';
-import { createCurriculum, getCurriculums } from '../../api/curriculum.js';
+import { createCurriculum, getCurriculums } from '../../../api/curriculum.js';
 
 
 

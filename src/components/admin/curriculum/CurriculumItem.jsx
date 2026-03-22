@@ -1,8 +1,8 @@
 import { useMutation } from '@tanstack/react-query';
-import Button from '../common/Button';
+import Button from '../../common/Button';
 import styles from './CurriculumItem.module.css';
-import { queryClient } from '../../api/queryClient';
-import { activeCurriculum, deleteCurriculum } from '../../api/curriculum';
+import { queryClient } from '../../../api/queryClient';
+import { activeCurriculum, deleteCurriculum } from '../../../api/curriculum';
 
 
 export default function CurriculumItem({ data, onEdit }) {

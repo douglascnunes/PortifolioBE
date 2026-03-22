@@ -1,26 +1,23 @@
 import { useMutation } from '@tanstack/react-query';
-import Button from '../common/Button';
-import styles from './RecommendationItem.module.css';
-import { deleteRecommendation } from '../../api/recommendation';
-import { queryClient } from '../../api/queryClient';
+import Button from '../../common/Button.jsx';
+import styles from './SkillItem.module.css';
+import { deleteTag } from '../../../api/tag.js';
+import { queryClient } from '../../../api/queryClient.js';
 
 
-export default function ProjectItem({ data, onEdit }) {
+export default function SkillItem({ data, onEdit }) {
   const { mutate } = useMutation({
-    mutationFn: deleteRecommendation,
+    mutationFn: deleteTag,
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ['recommendation'] });
+      queryClient.invalidateQueries({ queryKey: ['skill'] });
     }
   });
 
+
   return (
     <div className={styles.container}>
-      <span className={styles.title}>{data.title}</span>
-
-      <div className={styles.author}>
-        <span>Autor: </span>
-        <span>{data.author}</span>
-      </div>
+      <img className={styles.icon} src={data.fileUrl} alt={data.name} />
+      <span className={styles.title}>{data.name}</span>
 
       <div className={styles.buttons}>
         <Button
@@ -37,7 +34,7 @@ export default function ProjectItem({ data, onEdit }) {
         <Button
           className={styles.deleteBtn}
           type="icon"
-          onClick={() => mutate({recommendationID: data.id})}
+          onClick={() => mutate({ tagID: data.id })}
         >
           <svg className="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
             <path fillRule="evenodd" d="M8.586 2.586A2 2 0 0 1 10 2h4a2 2 0 0 1 2 2v2h3a1 1 0 1 1 0 2v12a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V8a1 1 0 0 1 0-2h3V4a2 2 0 0 1 .586-1.414ZM10 6h4V4h-4v2Zm1 4a1 1 0 1 0-2 0v8a1 1 0 1 0 2 0v-8Zm4 0a1 1 0 1 0-2 0v8a1 1 0 1 0 2 0v-8Z" clipRule="evenodd" />
