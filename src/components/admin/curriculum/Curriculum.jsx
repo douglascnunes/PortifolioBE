@@ -71,6 +71,7 @@ export default function Curriculum() {
     )
   );
 
+  
   return (
     <>
       <div className={styles.admSection}>

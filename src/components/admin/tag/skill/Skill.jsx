@@ -1,33 +1,35 @@
-import Button from '../../common/Button.jsx';
+import Button from '../../../common/Button.jsx';
 import styles from './Skill.module.css';
-import SectionDivider from '../../common/SectionDivider.jsx';
+import SectionDivider from '../../../common/SectionDivider.jsx';
 import { useMutation, useQuery } from '@tanstack/react-query';
-import { createTag, getSkills, updateTag } from '../../../api/tag.js';
-import { queryClient } from '../../../api/queryClient.js';
+import { createTag, getSkills, updateTag } from '../../../../api/tag.js';
+import { queryClient } from '../../../../api/queryClient.js';
 import { useState } from 'react';
-import Input from '../../common/Input.jsx';
+import Input from '../../../common/Input.jsx';
 
 
 import SkillItem from './SkillItem.jsx';
-import { TAG_TYPE } from '../../../util/enum.jsx';
+import { TAG_TYPE } from '../../../../util/enum.jsx';
+import Svg from '../../../common/Svg.jsx';
 
 
 export default function Skill() {
   const [skill, setSkill] = useState({
     id: null,
     name: '',
-    // description: '',
-    file: null,
+    svg: '',
     type: TAG_TYPE[1],
   });
   const [editing, setEditing] = useState(false);
+
 
   const { data, isLoading } = useQuery({
     queryKey: ['skill'],
     queryFn: ({ signal }) => getSkills({ signal }),
   });
 
-  const { mutate: createtag } = useMutation({
+
+  const { mutate: createSkill } = useMutation({
     mutationFn: createTag,
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['skill'] });
@@ -35,13 +37,13 @@ export default function Skill() {
         id: null,
         name: '',
         description: '',
-        file: null,
+        svg: '',
         type: TAG_TYPE[1],
       });
     }
   });
 
-  const { mutate: updatetag } = useMutation({
+  const { mutate: updateSkill } = useMutation({
     mutationFn: updateTag,
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['skill'] });
@@ -49,37 +51,37 @@ export default function Skill() {
         id: null,
         name: '',
         description: '',
-        file: null,
+        svg: '',
         type: TAG_TYPE[1],
       });
     }
   });
 
-  function handleSubmit() {
-    if (!skill.file) {
-      alert('Selecione um arquivo PDF');
+  function handleSubmit(mode) {
+    if (!skill.svg && !editing) {
+      alert('Selecione um arquivo SVG');
+      return;
+    };
+
+    if (mode === 'edit' && skill.id !== null) {
+      updateSkill({ tag: skill });
+      setEditing(false);
       return;
     }
 
-    const formData = new FormData();
-    formData.append('name', skill.name);
-    formData.append('file', skill.file);
-    formData.append('type', skill.type);
-
-    createtag({ tag: formData });
-  }
+    createSkill({ tag: skill });
+    setEditing(false);
+  };
 
   function handleEdit(s) {
+    setEditing(true);
+
     setSkill({
       id: s.id,
       name: s.name,
-      // description: rec.description,
-      file: s.file,
+      svg: s.svg,
       type: TAG_TYPE[1],
     });
-
-    setEditing(true);
-    console.log(skill)
   };
 
   function handleCancel() {
@@ -87,7 +89,7 @@ export default function Skill() {
       id: null,
       name: '',
       description: '',
-      file: null,
+      svg: '',
       type: TAG_TYPE[1],
     });
     setEditing(false);
@@ -105,14 +107,14 @@ export default function Skill() {
 
   else {
     skillList = data.skills.map((skill) => (
-      <SkillItem key={skill.id} data={skill} onEdit={handleEdit} />
+      <SkillItem key={skill.id} data={skill} onEdit={() => handleEdit(skill)} />
     ));
   }
 
   return (
     <>
       <div className={styles.admSection}>
-        <div className={styles.recTitle}>
+        <div className={styles.recName}>
           <label>NOME DA HABILIDADE</label>
           <Input
             type="text"
@@ -123,19 +125,30 @@ export default function Skill() {
           />
         </div>
 
-        <div className={styles.recTitle}>
+        <div className={styles.recIconInput}>
           <label>ÍCONE</label>
           <Input
             type="file"
+            valueName="svg"
             accept='image/svg+xml'
             onChangeFn={setSkill}
           />
         </div>
 
+        <div className={styles.recIconPreview}>
+          <label>IMAGEM:</label>
+          {!skill.svg && (
+            <img className={styles.iconPreview} src='/images/placeholder.png' alt="preview" />
+          )}
+          {skill.svg && (
+            <Svg data={skill.svg} render='tagPreview'/>
+          )}
+        </div>
+
         <div className={styles.buttonGroup}>
           <Button
-            onClick={handleSubmit}>
-            {editing ? 'Atualizar habilidade' : 'Salvar habilidade'}
+            onClick={() => handleSubmit(editing ? 'edit' : 'create')}>
+            {editing ? 'Atualizar Habilidade' : 'Salvar Habilidade'}
           </Button>
 
           <Button

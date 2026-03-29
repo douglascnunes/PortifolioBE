@@ -1,22 +1,23 @@
 import { useMutation } from '@tanstack/react-query';
-import Button from '../../common/Button.jsx';
-import styles from './SkillItem.module.css';
-import { deleteTag } from '../../../api/tag.js';
-import { queryClient } from '../../../api/queryClient.js';
+import Button from '../../../common/Button.jsx';
+import styles from './TechItem.module.css';
+import { deleteTag } from '../../../../api/tag.js';
+import { queryClient } from '../../../../api/queryClient.js';
+import Svg from '../../../common/Svg.jsx';
 
 
-export default function SkillItem({ data, onEdit }) {
+export default function TechItem({ data, onEdit }) {
   const { mutate } = useMutation({
     mutationFn: deleteTag,
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ['skill'] });
+      queryClient.invalidateQueries({ queryKey: ['tech'] });
     }
   });
 
 
   return (
     <div className={styles.container}>
-      <img className={styles.icon} src={data.fileUrl} alt={data.name} />
+      <Svg data={data.svg} render="tagItem" />
       <span className={styles.title}>{data.name}</span>
 
       <div className={styles.buttons}>
@@ -44,4 +45,4 @@ export default function SkillItem({ data, onEdit }) {
       </div>
     </div>
   )
-}
+};

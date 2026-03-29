@@ -17,6 +17,23 @@ export async function getTags({ signal }) {
 }
 
 
+
+export async function getTechs({ signal }) {
+
+  const response = await fetch(`${url}techs`, {
+    signal,
+    method: 'GET',
+  });
+
+  if (!response.ok) {
+    throw new Error("Failed to fetch techs data");
+  }
+
+  return await response.json();
+};
+
+
+
 export async function getSkills({ signal }) {
 
   const response = await fetch(`${url}skills`, {
@@ -29,7 +46,8 @@ export async function getSkills({ signal }) {
   }
 
   return await response.json();
-}
+};
+
 
 
 
@@ -39,8 +57,9 @@ export async function createTag({ signal, tag }) {
   const response = await fetch(`${url}tag`, {
     signal,
     method: 'POST',
-    body: tag,
+    body: JSON.stringify(tag),
     headers: {
+      'Content-Type': 'application/json',
       'Authorization': 'Bearer ' + token,
     }
   });
@@ -53,14 +72,16 @@ export async function createTag({ signal, tag }) {
 };
 
 
+
 export async function updateTag({ signal, tag }) {
   const token = getAuthToken();
 
   const response = await fetch(`${url}tag/${tag.id}`, {
     signal,
     method: 'PUT',
-    body: tag,
+    body: JSON.stringify(tag),
     headers: {
+      'Content-Type': 'application/json',
       'Authorization': 'Bearer ' + token,
     }
   });

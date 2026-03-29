@@ -1,0 +1,34 @@
+.container {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  height: 3rem;
+  padding: 0 1rem;
+  border: 0.1rem solid #dddddd;
+}
+
+.title {
+  color:#dddddd;
+}
+
+.author span:first-child {
+  color: #666666;
+}
+
+.author span:last-child {
+  color: #dddddd;
+}
+
+.buttons {
+  display: flex;
+  flex-direction: row;
+  gap: 1rem;
+}
+
+.icon {
+  color: #dddddd;
+  height: 100%;
+}
+

@@ -6,6 +6,7 @@ import Button from "../../common/Button";
 import ProjectEditor from "./ProjectEditor";
 
 import styles from './Project.module.css';
+import ProjectContextProvider, { ProjectContext } from "../../../store/project-context";
 
 
 export default function Project({ }) {
@@ -21,7 +22,7 @@ export default function Project({ }) {
 
   if (isEditing) {
     return (
-      <>
+      <ProjectContextProvider>
         <ProjectEditor />
         <div className={styles.projectEditorBtn}>
           <Button onClick={() => setIsEditing(false)}>
@@ -32,7 +33,7 @@ export default function Project({ }) {
             Cancelar
           </Button>
         </div>
-      </>
+      </ProjectContextProvider>
     )
   }
 

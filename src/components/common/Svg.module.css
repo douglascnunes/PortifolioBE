@@ -1,0 +1,33 @@
+.container svg {
+  width: 100%;
+  height: 100%;
+}
+
+
+.container.default svg * {
+  fill: currentColor;
+}
+
+
+
+.tagPreview {
+  width: 5rem;
+  height: 5rem
+}
+
+.container.tagPreview svg * {
+  fill: #dddddd;
+}
+
+
+
+.tagItem {
+  max-height: 2.5rem;
+  max-width: 2.5rem;
+}
+
+.container.tagItem svg * {
+  fill: #dddddd;
+}
+
+

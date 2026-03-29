@@ -7,7 +7,8 @@ import { useState } from 'react';
 import Recommendation from '../components/admin/recommendation/Recommendation.jsx';
 import Curriculum from '../components/admin/curriculum/Curriculum.jsx';
 import Project from '../components/admin/project/Project.jsx';
-import Ability from '../components/admin/skill/Skill.jsx';
+import Skill from '../components/admin/tag/skill/Skill.jsx';
+import Tech from '../components/admin/tag/tech/Tech.jsx';
 
 
 export default function AdminPage() {
@@ -33,11 +34,11 @@ export default function AdminPage() {
       title = 'Experiência Profissional';
       break;
     case 'techs':
-      content = <h2>Tecnologias</h2>;
+      content = <Tech />;
       title = 'Tecnologias';
       break;
     case 'abilities':
-      content = <Ability />;
+      content = <Skill />;
       title = 'Habilidades';
       break;
     case 'users':
