@@ -16,3 +16,9 @@
   width: fit-content;
   margin: 0 auto;
 }
+
+.content {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}

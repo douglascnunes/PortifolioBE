@@ -4,8 +4,6 @@ import TagPickerModal from './TagPickerModal';
 import Button from '../../common/Button';
 import { TAG_TYPE } from '../../../util/enum';
 import TagItem from './TagItem';
-import { useQuery } from '@tanstack/react-query';
-import { getTags } from '../../../api/tag';
 import { ProjectContext } from '../../../store/project-context';
 
 
@@ -35,8 +33,8 @@ export default function TagSetter({ type }) {
 
       <div className={styles.container}>
         <label>{label}</label>
-        <Button onClick={openModal}>Adicionar {label}</Button>
         <div className={styles.tags}>
+          <Button onClick={openModal}>Adicionar {label}</Button>
           {projectTags && projectTags.length === 0 && <p>Nenhuma {label} associada.</p>}
 
           {projectTags && projectTags.map(tag => {

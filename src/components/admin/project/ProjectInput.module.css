@@ -1,0 +1,19 @@
+.container {
+  width: 100%;
+  border: 0.1rem solid #333;
+  border-radius: 0.5rem;
+  padding: 1rem;
+}
+
+.container p {
+  font-size: 1rem;
+  font-weight: 400;
+  line-height: 1.5rem;
+  color: #cccccc;
+}
+
+.typeButtons {
+  display: flex;
+  flex-direction: row;
+  gap: 1rem;
+}

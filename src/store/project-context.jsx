@@ -8,13 +8,16 @@ export const ProjectContext = createContext({
   state: null,
   content: null,
   tags: null,
+  ctxIndex: null,
   setTitle: () => { },
   setSumary: () => { },
   setCoverImage: () => { },
   setState: () => { },
-  setContent: () => { },
-  setTag: () => { },
+  addContent: () => { },
+  moveContent: () => { },
+  removeContent: () => { },
   toggleTag: () => { },
+  setCtxIndex: () => { },
 });
 
 
@@ -47,19 +50,52 @@ function projectReducer(state, action) {
     };
   };
 
-  if (action.type === 'SET_CONTENT') {
+
+  if (action.type === 'ADD_CONTENT') {
+    const newContent = [...state.content];
+
+    newContent.splice(action.payload.index, 0, action.payload);
+
+    const updatedContent = newContent.map((item, index) => ({
+      ...item,
+      index,
+    }));
+
     return {
       ...state,
-      content: action.payload,
+      content: updatedContent,
     };
   };
 
-  if (action.type === 'SET_TAG') {
+
+  if (action.type === 'MOVE_CONTENT') {
+    const { oldIndex, newIndex } = action.payload;
+
+    const newContent = [...state.content];
+
+    const [movedItem] = newContent.splice(oldIndex, 1);
+
+    newContent.splice(newIndex, 0, movedItem);
+
+    const updatedContent = newContent.map((item, index) => ({
+      ...item,
+      index
+    }));
+
     return {
       ...state,
-      tags: action.payload,
+      content: updatedContent
+    };
+  }
+
+
+  if (action.type === 'REMOVE_CONTENT') {
+    return {
+      ...state,
+      content: [...state.content, action.payload],
     };
   };
+
 
   if (action.type === 'TOGGLE_TAG') {
     const currentTags = state.tags ?? [];
@@ -78,6 +114,14 @@ function projectReducer(state, action) {
       tags: newTags
     };
   };
+
+
+  if (action.type === 'SET_CTX_INDEX') {
+    return {
+      ...state,
+      ctxIndex: action.payload,
+    };
+  };
 };
 
 
@@ -88,7 +132,8 @@ export default function ProjectContextProvider({ children }) {
     coverImage: null,
     state: null,
     content: [],
-    tags: []
+    tags: [],
+    ctxIndex: 0,
   };
 
   const [state, dispatch] = useReducer(projectReducer, initalState);
@@ -109,16 +154,20 @@ export default function ProjectContextProvider({ children }) {
     dispatch({ type: 'SET_STATE', payload: state });
   };
 
-  function handleSetContent(content) {
-    dispatch({ type: 'SET_CONTENT', payload: content });
+  function handleAddContent(content) {
+    dispatch({ type: 'ADD_CONTENT', payload: content });
   };
 
-  function handleSetTag(tag) {
-    dispatch({ type: 'SET_TAG', payload: tag });
+  function handleMoveContent(content, oldIndex, newIndex) {
+    dispatch({ type: 'MOVE_CONTENT', payload: { content, oldIndex, newIndex } });
   };
 
   function handleToggleTag(tag) {
     dispatch({ type: 'TOGGLE_TAG', payload: tag });
+  };
+
+  function handleSetCtxIndex(index) {
+    dispatch({ type: 'SET_CTX_INDEX', payload: index });
   };
 
 
@@ -129,13 +178,15 @@ export default function ProjectContextProvider({ children }) {
     state: state.state,
     content: state.content,
     tags: state.tags,
+    ctxIndex: state.ctxIndex,
     setTitle: handleSetTitle,
     setSumary: handleSetSumary,
     setCoverImage: handleSetCoverImage,
     setState: handleSetState,
-    setContent: handleSetContent,
-    setTag: handleSetTag,
-    toggleTag: handleToggleTag
+    addContent: handleAddContent,
+    moveContent: handleMoveContent,
+    toggleTag: handleToggleTag,
+    setCtxIndex: handleSetCtxIndex
   };
 
   return (

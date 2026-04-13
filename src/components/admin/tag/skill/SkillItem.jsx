@@ -10,7 +10,7 @@ export default function SkillItem({ data, onEdit }) {
   const { mutate } = useMutation({
     mutationFn: deleteTag,
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ['skill'] });
+      queryClient.invalidateQueries({ queryKey: ['tag'] });
     }
   });
 

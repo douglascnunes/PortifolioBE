@@ -8,7 +8,7 @@ import { getSkills, getTechs } from '../../../api/tag';
 
 
 export default function TagPickerModal({ isOpenModal, closeModal, type }) {
-  const { tag: projectTags, toggleTag } = useContext(ProjectContext);
+  const { tags: projectTags, toggleTag } = useContext(ProjectContext);
   const modalRef = useRef();
 
   const { data: fetchedTags } = useQuery({
@@ -18,6 +18,7 @@ export default function TagPickerModal({ isOpenModal, closeModal, type }) {
       ({ signal }) => getSkills({ signal })
   });
 
+  const filteredTags = fetchedTags?.tags?.filter(tag => !projectTags.some(projectTag => projectTag.id === tag.id));
 
   useEffect(() => {
     const handleClickOutside = e => {
@@ -40,8 +41,8 @@ export default function TagPickerModal({ isOpenModal, closeModal, type }) {
         <div className={styles.avaliableTagsContaienr}>
           <h4>Tecnologias disponiveis</h4>
           <div className={styles.avaliableTags}>
-            {fetchedTags ?
-              (fetchedTags.tags.map(tag => (
+            {filteredTags ?
+              (filteredTags.map(tag => (
                 <TagItem
                   key={tag.id}
                   data={tag}
@@ -59,8 +60,13 @@ export default function TagPickerModal({ isOpenModal, closeModal, type }) {
           <h4>Tecnologias selecionadas</h4>
           <div className={styles.selectedTags}>
             {projectTags ?
-              (projectTags.map(tag => (
-                <TagItem key={tag.id} data={tag} mode='picker' />
+              (projectTags.filter(tag => tag.type === type).map(tag => (
+                <TagItem
+                  key={tag.id}
+                  data={tag}
+                  mode='picker'
+                  onClick={() => toggleTag(tag)}
+                />
               )))
               :
               <p>Nenhuma tag selecionada</p>

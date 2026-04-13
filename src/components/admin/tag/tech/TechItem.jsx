@@ -10,7 +10,7 @@ export default function TechItem({ data, onEdit }) {
   const { mutate } = useMutation({
     mutationFn: deleteTag,
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ['tech'] });
+      queryClient.invalidateQueries({ queryKey: ['tag'] });
     }
   });
 

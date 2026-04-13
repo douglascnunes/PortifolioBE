@@ -1,23 +1,20 @@
-import { useContext, useState } from "react";
+import { useContext } from "react";
 
 import styles from './ProjectEditor.module.css';
 import ProjectBlock from "./ProjectBlock";
 import Input from "../../common/Input";
 import TextArea from "../../common/TextArea";
-import { PROJECT_STATE, TAG_TYPE } from "../../../util/enum";
-import Select from "../../common/Select";
+import { TAG_TYPE } from "../../../util/enum";
 import TagSetter from "../tag/TagSetter";
-import { useQuery } from "@tanstack/react-query";
-import { getTags } from "../../../api/tag";
 import { ProjectContext } from "../../../store/project-context";
+import ProjectInput from "./ProjectInput";
 
 
 export default function ProjectEditor({ }) {
   const {
     title, setTitle,
     sumary, setSumary,
-    state, setState,
-
+    content, setContent,
   } = useContext(ProjectContext);
 
 
@@ -38,32 +35,31 @@ export default function ProjectEditor({ }) {
           placeholder='Escreva um parágrafo introdutório para o projeto'
           render='sumary'
         />
-        {/* 
-        <Input
-          type='file'
-          accept='application/pdf'
-          onChangeFn={setProject}
-        /> */}
 
-        {/* <img className={styles.coverPreview} src={project.coverPreview} /> */}
-        {/* 
-        <Select
-          value={state}
-          onChangeFn={setState}
-          list={PROJECT_STATE}
-        /> */}
 
         <TagSetter type={TAG_TYPE[0]} />
         <TagSetter type={TAG_TYPE[1]} />
       </div>
 
+      {content.length > 0 ? (
+        content.map((cont, index) => (
+          <div className={styles.content} key={cont.id ?? cont.clientId}>
+            <ProjectBlock
+              data={cont}
+              index={index}
+              renderIndex={index * 2}
+            />
 
-      {/* {project.content.length > 0 &&
-        project.content.map((c, index) => (
-          <ProjectBlock key={index} data={c} project={project} setProject={setProject} mode='view' />
+            <ProjectInput
+              index={index + 1}
+              renderIndex={(index * 2) + 1}
+            />
+          </div>
         ))
-      }
-      <ProjectBlock project={project} setProject={setProject} /> */}
+      ) : (
+        <ProjectInput index={0} renderIndex={0} />
+      )}
+
     </div>
   )
 }

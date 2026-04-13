@@ -24,7 +24,7 @@ export default function Tech() {
 
 
   const { data, isLoading } = useQuery({
-    queryKey: ['tech'],
+    queryKey: ['tag','tech'],
     queryFn: ({ signal }) => getTechs({ signal }),
   });
 
@@ -32,7 +32,7 @@ export default function Tech() {
   const { mutate: createtag } = useMutation({
     mutationFn: createTag,
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ['tech'] });
+      queryClient.invalidateQueries({ queryKey: ['tag'] });
       setTech({
         id: null,
         name: '',
@@ -46,7 +46,7 @@ export default function Tech() {
   const { mutate: updatetag } = useMutation({
     mutationFn: updateTag,
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ['tech'] });
+      queryClient.invalidateQueries({ queryKey: ['tag'] });
       setTech({
         id: null,
         name: '',
@@ -101,12 +101,12 @@ export default function Tech() {
     techList = <p>Carregando Tecnologias...</p>;
   }
 
-  else if (!data?.techs || data.techs.length === 0) {
+  else if (!data?.tags || data.tags.length === 0) {
     techList = <p>Nenhuma tecnologia encontrada.</p>;
   }
 
   else {
-    techList = data.techs.map((tech) => (
+    techList = data.tags.map((tech) => (
       <TechItem key={tech.id} data={tech} onEdit={() => handleEdit(tech)} />
     ));
   }

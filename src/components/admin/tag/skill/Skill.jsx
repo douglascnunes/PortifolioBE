@@ -24,7 +24,7 @@ export default function Skill() {
 
 
   const { data, isLoading } = useQuery({
-    queryKey: ['skill'],
+    queryKey: ['tag','skill'],
     queryFn: ({ signal }) => getSkills({ signal }),
   });
 
@@ -32,7 +32,7 @@ export default function Skill() {
   const { mutate: createSkill } = useMutation({
     mutationFn: createTag,
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ['skill'] });
+      queryClient.invalidateQueries({ queryKey: ['tag'] });
       setSkill({
         id: null,
         name: '',
@@ -46,7 +46,7 @@ export default function Skill() {
   const { mutate: updateSkill } = useMutation({
     mutationFn: updateTag,
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ['skill'] });
+      queryClient.invalidateQueries({ queryKey: ['tag'] });
       setSkill({
         id: null,
         name: '',
@@ -101,12 +101,12 @@ export default function Skill() {
     skillList = <p>Carregando Habilidades...</p>;
   }
 
-  else if (!data?.skills || data.skills.length === 0) {
+  else if (!data?.tags || data.tags.length === 0) {
     skillList = <p>Nenhuma habilidade encontrada.</p>;
   }
 
   else {
-    skillList = data.skills.map((skill) => (
+    skillList = data.tags.map((skill) => (
       <SkillItem key={skill.id} data={skill} onEdit={() => handleEdit(skill)} />
     ));
   }
